@@ -1,99 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tirador Vampiro</title>
     <style>
-        .blueCenter {
-            color: blue;
-            text-align: center;
-        }
+      .blueCenter {
+        color: blue;
+        text-align: center;
+      }
 
-        .greyBackground {
-            background-color: grey;
-        }
+      .greyBackground {
+        background-color: grey;
+      }
 
-        .rojo {
-            color: red;
-            font-weight: bold;
-        }
+      .rojo {
+        color: red;
+        font-weight: bold;
+      }
 
-        form {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
+      form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <h1>Calculadora combate VTM</h1>
     <form>
-        <div>
-            <label for="Dificultad">Dificultad</label><br />
-            <input type="text" id="dificultad" name="dificultad" value="6" />
-        </div>
-        <br />
-        <div>
-            <label for="Ataque">Destreza</label><br />
-            <input type="text" id="ataque" name="ataque" />
-        </div>
+      <div>
+        <label for="Dificultad">Dificultad</label><br />
+        <input type="text" id="dificultad" name="dificultad" value="6" />
+      </div>
+      <br />
+      <div>
+        <label for="Ataque">Destreza</label><br />
+        <input type="text" id="ataque" name="ataque" />
+      </div>
 
-        <div>
-            <label for="Pelea">Pelea, armas CC, de fuego o atletismo</label><br />
-            <input type="text" id="pelea" name="pelea" />
-        </div>
+      <div>
+        <label for="Pelea">Pelea, armas CC, de fuego o atletismo</label><br />
+        <input type="text" id="pelea" name="pelea" />
+      </div>
 
-        <div>
-            <label for="celeridad">Celeridad</label><br />
-            <input type="number" oninput="mostrar()" id="celeridad" name="celeridad" value="0" />
-        </div>
+      <div>
+        <label for="celeridad">Celeridad</label><br />
+        <input
+          type="number"
+          oninput="mostrar()"
+          id="celeridad"
+          name="celeridad"
+          value="0"
+        />
+      </div>
 
-        <div id="esconderCeleridad" hidden>
-            <label for="acciones">Cuántas acciones extra?</label><br />
-            <input type="number" id="acciones" name="acciones" value="0" />
-        </div>
+      <div id="esconderCeleridad" hidden>
+        <label for="acciones">Cuántas acciones extra?</label><br />
+        <input type="number" id="acciones" name="acciones" value="0" />
+      </div>
 
-        <br id="bujero" />
-        <div>
-            <label for="impacto">Éxitos en la tirada de impacto </label>
-            <p id="impacto"></p>
-        </div>
-        <br id="otrobujero" />
+      <br id="bujero" />
+      <div>
+        <label for="impacto">Éxitos en la tirada de impacto </label>
+        <p id="impacto"></p>
+      </div>
+      <br id="otrobujero" />
 
-        <div>
-            <label for="fuerza">Fuerza</label><br />
-            <input type="number" id="fuerza" name="fuerza" />
-        </div>
+      <div>
+        <label for="fuerza">Fuerza</label><br />
+        <input type="number" id="fuerza" name="fuerza" />
+      </div>
 
-        <div>
-            <label for="Pot">Potencia</label><br />
-            <input type="number" id="pot" name="pot" />
-        </div>
+      <div>
+        <label for="Pot">Potencia</label><br />
+        <input type="number" id="pot" name="pot" />
+      </div>
 
-        <div>
-            <label for="potacti">Está activa potencia?</label> <br />
-            <input type="checkbox" id="potacti" name="potacti" />
-        </div>
+      <div>
+        <label for="potacti">Está activa potencia?</label> <br />
+        <input type="checkbox" id="potacti" name="potacti" />
+      </div>
 
-        <div>
-            <label for="arma">Daño del arma</label><br />
-            <input type="number" id="arma" name="arma" />
-        </div>
+      <div>
+        <label for="arma">Daño del arma</label><br />
+        <input type="number" id="arma" name="arma" />
+      </div>
 
-        <div>
-            <label for="secComb">Secundaria de combate?</label> <br />
-            <input type="checkbox" id="secComb" name="secComb" />
-        </div>
+      <div>
+        <label for="secComb">Secundaria de combate?</label> <br />
+        <input type="checkbox" id="secComb" name="secComb" />
+      </div>
     </form>
     <br />
 
     <button class="blueCenter" onclick="showStuff()">Calcular</button>
     <button class="blueCenter" onClick="borrarHistorial()">
-        Borrar historial
+      Borrar historial
     </button>
     <br />
     <h3 id="exitos">Heridas:</h3>
@@ -101,115 +106,106 @@
     <h3 id="ejemplo"></h3>
 
     <script>
-        function mostrar() {
-            let celeridad = document.getElementById("celeridad");
-            let esconderCeleridad = document.getElementById("esconderCeleridad");
+      function mostrar() {
+        let celeridad = document.getElementById("celeridad");
+        let esconderCeleridad = document.getElementById("esconderCeleridad");
 
-            if (celeridad.value != 0) {
-                esconderCeleridad.hidden = false;
-                document.getElementById("bujero").hidden = true;
-            } else {
-                esconderCeleridad.hidden = true;
-                document.getElementById("bujero").hidden = false;
-            }
+        if (celeridad.value != 0) {
+          esconderCeleridad.hidden = false;
+          document.getElementById("bujero").hidden = true;
+        } else {
+          esconderCeleridad.hidden = true;
+          document.getElementById("bujero").hidden = false;
         }
-        function showStuff() {
-            let ataque = document.getElementById("ataque").value;
-            let pelea = document.getElementById("pelea").value;
-            let celeridad = document.getElementById("celeridad").value;
-            let acciones = document.getElementById("acciones").value;
-            let dados = Number(ataque) + Number(pelea);
-            let arma = document.getElementById("arma").value;
-            let potencia = document.getElementById("pot").value;
-            let fuerza = document.getElementById("fuerza").value;
-            let guantazo = Number(fuerza) + Number(arma);
-            let potacti = document.getElementById("potacti");
-            let superguantazo = Number(guantazo) + Number(potencia)
+      }
+      function showStuff() {
+        let ataque = document.getElementById("ataque").value;
+        let pelea = document.getElementById("pelea").value;
+        let celeridad = document.getElementById("celeridad").value;
+        let acciones = document.getElementById("acciones").value;
+        let dados = Number(ataque) + Number(pelea);
+        let arma = document.getElementById("arma").value;
+        let potencia = document.getElementById("pot").value;
+        let fuerza = document.getElementById("fuerza").value;
+        let guantazo = Number(fuerza) + Number(arma);
+        let potacti = document.getElementById("potacti");
+        let superguantazo = Number(guantazo) + Number(potencia);
 
-            if (document.getElementById("acciones") == 0) {
-                dados = Number(dados) + Number(celeridad);
-            } else {
-                celeactiva = Number(celeridad) - Number(acciones);
-                dados = Number(dados) + Number(celeactiva);
-            }
-            let aciertos = 0;
-            console.log("Cantidad de dados antes de bucle: " + dados);
-            let dificultad = document.getElementById("dificultad").value;
-            let heridas = 0;
-
-            for (let i = dados; i > 0; i--) {
-                let a = Math.floor(Math.random() * 10) + 1;
-                //console.log(a);
-                if (a == 10 && document.getElementById("secComb").checked == true) {
-                    aciertos = aciertos + 2;
-                } else if (a >= dificultad) {
-                    aciertos++;
-                } else if (a == 1) {
-                    aciertos--;
-                }
-            }
-
-            console.log("aciertos: " + aciertos);
-            let impacto = document.getElementById("impacto");
-            impacto.innerHTML = aciertos;
-
-            if (aciertos < 0) {
-                document.getElementById("exitos").innerHTML = "Pifia!";
-                document.getElementById("exitos").classList.add("rojo");
-                document.getElementById("previos").innerHTML =
-                    `<p class="rojo">Tirada anterior: Pifia! </p>` +
-                    document.getElementById("previos").innerHTML;
-            } else if (aciertos == 0) {
-                    document.getElementById("exitos").innerHTML = "Fallo!";
-                    document.getElementById("exitos").classList.remove("rojo");
-                    document.getElementById("previos").innerHTML =
-                        `<p>Tirada anterior: Fallo!</p>` +
-                        document.getElementById("previos").innerHTML;
-            }
-            else {
-                if (potacti.checked == true) {
-                    for (let j = guantazo + aciertos; j > 0; j--) {
-                        let b = Math.floor(Math.random() * 10) + 1;
-                        console.log("dados de daño con potencia activada=" + j);
-                        if (b >= 6) {
-                            heridas++;
-                         } else if (b == 1) {
-                            heridas--;
-                        }
-                       
-                       
-                    }
-                    console.log("heridas antes de potencia=" +heridas)
-                    heridas = Number(heridas) + Number(potencia)
-                }
-                    else {
-                        for (let j = superguantazo + aciertos; j > 0; j--) {
-                            let b = Math.floor(Math.random() * 10) + 1;
-                            console.log("Dados de daño sin potencia=" + j);
-                            if (b >= 6) {
-                                heridas++;
-                            } else if (b == 1) {
-                                heridas--;
-                            }
-                        }
-                    }
-
-
-                }
-
-            document.getElementById("exitos").classList.remove("rojo");
-            document.getElementById("exitos").innerHTML = "Heridas: " + heridas;
-
-            document.getElementById("previos").innerHTML =
-                `<p>Tirada anterior: ${heridas}</p>` +
-                document.getElementById("previos").innerHTML;
+        if (document.getElementById("acciones") == 0) {
+          dados = Number(dados) + Number(celeridad);
+        } else {
+          celeactiva = Number(celeridad) - Number(acciones);
+          dados = Number(dados) + Number(celeactiva);
         }
-      
+        let aciertos = 0;
+        console.log("Cantidad de dados antes de bucle: " + dados);
+        let dificultad = document.getElementById("dificultad").value;
+        let heridas = 0;
 
-        function borrarHistorial() {
-            document.getElementById("previos").innerHTML = "";
+        for (let i = dados; i > 0; i--) {
+          let a = Math.floor(Math.random() * 10) + 1;
+          //console.log(a);
+          if (a == 10 && document.getElementById("secComb").checked == true) {
+            aciertos = aciertos + 2;
+          } else if (a >= dificultad) {
+            aciertos++;
+          } else if (a == 1) {
+            aciertos--;
+          }
         }
+
+        console.log("aciertos: " + aciertos);
+        let impacto = document.getElementById("impacto");
+        impacto.innerHTML = aciertos;
+
+        if (aciertos < 0) {
+          document.getElementById("exitos").innerHTML = "Pifia!";
+          document.getElementById("exitos").classList.add("rojo");
+          document.getElementById("previos").innerHTML =
+            `<p class="rojo">Tirada anterior: Pifia! </p>` +
+            document.getElementById("previos").innerHTML;
+        } else if (aciertos == 0) {
+          document.getElementById("exitos").innerHTML = "Fallo!";
+          document.getElementById("exitos").classList.remove("rojo");
+          document.getElementById("previos").innerHTML =
+            `<p>Tirada anterior: Fallo!</p>` +
+            document.getElementById("previos").innerHTML;
+        } else {
+          if (potacti.checked == true) {
+            for (let j = guantazo + aciertos; j > 0; j--) {
+              let b = Math.floor(Math.random() * 10) + 1;
+              console.log("dados de daño con potencia activada=" + j);
+              if (b >= 6) {
+                heridas++;
+              } else if (b == 1) {
+                heridas--;
+              }
+            }
+            console.log("heridas antes de potencia=" + heridas);
+            heridas = Number(heridas) + Number(potencia);
+          } else {
+            for (let j = superguantazo + aciertos; j > 0; j--) {
+              let b = Math.floor(Math.random() * 10) + 1;
+              console.log("Dados de daño sin potencia=" + j);
+              if (b >= 6) {
+                heridas++;
+              } else if (b == 1) {
+                heridas--;
+              }
+            }
+          }
+
+          document.getElementById("exitos").classList.remove("rojo");
+          document.getElementById("exitos").innerHTML = "Heridas: " + heridas;
+        }
+        document.getElementById("previos").innerHTML =
+          `<p>Tirada anterior: ${heridas}</p>` +
+          document.getElementById("previos").innerHTML;
+      }
+
+      function borrarHistorial() {
+        document.getElementById("previos").innerHTML = "";
+      }
     </script>
-</body>
-
+  </body>
 </html>
