@@ -197,10 +197,11 @@
 
           document.getElementById("exitos").classList.remove("rojo");
           document.getElementById("exitos").innerHTML = "Heridas: " + heridas;
-        }
+        
         document.getElementById("previos").innerHTML =
           `<p>Tirada anterior: ${heridas}</p>` +
           document.getElementById("previos").innerHTML;
+        }
       }
 
       function borrarHistorial() {
